@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Additional Resources",
+    "description": "Additional Resources of the search result is displayed in the extension",
+    "version": "1.0",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.google.com/search?*"
+            ],
+            "js": [
+                "./main.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_icon": "Nerd.png",
+        "default_popup": "popup.html",
+        "default_title": "Additional Resources"
+    }
+}
