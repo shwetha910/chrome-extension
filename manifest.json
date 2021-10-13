@@ -6,10 +6,11 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.google.com/search?*"
+                "<all_urls>"
             ],
             "js": [
-                "./main.js"
+                "./main.js",
+                "./jquery.min.js"
             ]
         }
     ],
@@ -17,5 +18,11 @@
         "default_icon": "Nerd.png",
         "default_popup": "popup.html",
         "default_title": "Additional Resources"
-    }
+    },
+    "permissions": [
+        "https://www.google.com/search?q=*",
+        "tabs",
+        "activeTab",
+        "<all_urls>"
+    ]
 }

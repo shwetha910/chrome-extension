@@ -1,47 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const title = document.createElement('h4');
-    title.innerText = 'Additional Resources';
-    document.querySelector('body').appendChild(title);
+    // const title = document.createElement('h4');
+    // title.innerText = 'Additional Resources';
+    // document.querySelector('body').appendChild(title);
+    //getting search element from google search box text
 
+    const srch = document.querySelector('#search_form_input_homepage');
+    console.log(srch, "srch");
+    //console.log(srch.value, "value");
 
-
-    //var searchResults=UrlFetchApp.fetch("https://www.google.com/search?q="+encodeURIComponent("keyword finder tool")+"&num=10",{muteHttpExceptions:true});
-    // fetch('https://curriculum-api.codesmith.io/messages')
-    // .then((response) => response.json())
-    // .then(data => {
-    //   for (let i = 0; i < 20; i++) {
-    //     document.querySelector('#incoming').innerHTML += `${data[i]['message']} by ${data[i]['created_by']}<br>`;
-    //   }
-    // })
-    // .catch(error => console.log(error))
-    fetch("https://www.google.com/search?q=" + encodeURIComponent("keyword finder tool") + "&num=10")
-        .then(data => {
-            console.log(data)
+    fetch(`https://serpapi.com/search.json?engine=google&q=coffee&api_key=6ab6335eb8617f5cd14d587f9ae2e56fdf4529b4101c95a28f8600b7b60c506c`)
+        //.then(console.log(response))
+        .then((response) => {
+            //console.log(response)
+            return response.json()
         })
-        .catch(error => console.log(error))
+        .then(data => {
+            console.log(data);
+            data.organic_results.forEach(element => {
+                console.log(element)
+                const title = element.title;
+                const link = element.link;
+                const el = document.createElement('div');
+                document.getElementById('links').appendChild(el)
+                el.innerHTML = `<a href=${link} rel="noopener noreferrer" target = "_blank">${title}</a><br>`;
+                //document.querySelector('body').appendChild(el)
+            })
 
-    // var titleExp = /<h3 class=\"r\">([\s\S]*?)<\/h3>/gi;
-    // var urlExpression = /<h3 class=\"r\">([\s\S]*?)\&amp\;/gi;
+        })
+        .catch((error) => console.log(error))
+})
 
 
-    // var titleResults = searchResults.getContentText().match(titleExp);
-    // var urlResults = searchResults.getContentText().match(urlExpression);
 
-
-    //To get the actual Title
-    // for(var i in titleResults)
-    //   {
-
-    //     var actualTitle=titleResults[i].replace(/(^\s+)|(\s+$)/g, "").replace(/<\/?[^>]+>/gi, "");
-    //     Logger.log(actualTitle);
-    //   }
-
-    //To get the actual URL
-    // for (var i in urlResults) {
-    //     var actualURL = urlResults[i].replace('<h3 class="r"><a href="/url?q=', "").replace('&amp;', "");
-    //     console.log(actualURL);
-    // }
-
-}
-
-)
